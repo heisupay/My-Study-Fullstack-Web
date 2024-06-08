@@ -82,8 +82,8 @@ app.get("/apiKey", async (req, res) => {
 
 const config = {
   headers: { Authorization:
-    "Bearer ${yourBearerToken}
-    "}
+    'Bearer ${yourBearerToken}
+    '},
 };
 
 app.get("/bearerToken", async (req, res) => {
