@@ -78,7 +78,7 @@ app.get("/secrets", async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  } else {
+} else {
     res.redirect("/login");
   }
 );
