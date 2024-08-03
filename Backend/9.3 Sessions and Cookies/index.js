@@ -66,7 +66,7 @@ app.get("/secrets", (req, res) => {
 });
 
 app.post(
-  "login",
+  "/login",
   passport.authenticate("local", {
     successRedirect: "/secrets",
     failureRedirect: "/login",
@@ -83,19 +83,22 @@ app.post("/register", async (req, res) => {
     ]);
 
     if (checkResult.rows.length > 0) {
-      res.redirect("/login");
+      req.redirect("/login");
     } else {
       //hashing the password and saving it in the database
       bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
           console.error("Error hashing password:", err);
         } else {
-          console.log("Hashed Password:", hash);
-          await db.query(
+          const result = await db.query(
             "INSERT INTO users (email, password) VALUES ($1, $2)",
             [email, hash]
           );
-          res.render("secrets.ejs");
+          const user = result.rows[0];
+          req.login(user, (err) => {
+            console.log("success");
+            result.redirect("/secrets");
+          });
         }
       });
     }
@@ -104,35 +107,38 @@ app.post("/register", async (req, res) => {
   }
 });
 
-app.post("/login", async (req, res) => {
-  const email = req.body.username;
-  const loginPassword = req.body.password;
-
-  try {
-    const result = await db.query("SELECT * FROM users WHERE email = $1", [
-      email,
-    ]);
-    if (result.rows.length > 0) {
-      const user = result.rows[0];
-      const storedHashedPassword = user.password;
-      bcrypt.compare(loginPassword, storedHashedPassword, (err, result) => {
-        if (err) {
-          console.error("Error comparing passwords:", err);
-        } else {
-          if (result) {
-            res.render("secrets.ejs");
+// app.post("/login", async (req, res) => {
+//   const email = req.body.username;
+//   const loginPassword = req.body.password;
+passport.use(
+  new Strategy(async function verify(username, passport, cb) {
+    try {
+      const result = await db.query("SELECT * FROM users WHERE email = $1", [
+        email,
+      ]);
+      if (result.rows.length > 0) {
+        const user = result.rows[0];
+        const storedHashedPassword = user.password;
+        bcrypt.compare(password, storedHashedPassword, (err, valid) => {
+          if (err) {
+            console.error("Error comparing passwords:", err);
+            return cb(err);
           } else {
-            res.send("Incorrect Password");
+            if (valid) {
+              return cb(null, user);
+            } else {
+              return cb(null, false);
+            }
           }
-        }
-      });
-    } else {
-      res.send("User not found");
+        });
+      } else {
+        return cb("User not found");
+      }
+    } catch (err) {
+      console.log(err);
     }
-  } catch (err) {
-    console.log(err);
-  }
-});
+  })
+);
 
 passport.deserializeUser((user, cb) => {
   cb(null, user);
