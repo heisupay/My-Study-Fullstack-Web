@@ -16,7 +16,7 @@ import ReactDom from "react-dom";
 
 ReactDom.render(
   <div>
-    <h1>My Favorite Foods</h1>
+    <h1 className="heading">My Favorite Foods</h1>
     <ul>
       <li>Bacon</li>
       <li>Noodles</li>
