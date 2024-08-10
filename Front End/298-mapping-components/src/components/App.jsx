@@ -1,8 +1,10 @@
+/** @format */
+
 import React from "react";
 import Card from "./Card";
 import contacts from "../contacts";
 
-function App() {
+function createCard(contact) {
   return (
     <div>
       <h1 className="heading">My Contacts</h1>
@@ -13,7 +15,7 @@ function App() {
         tel={contacts[0].phone}
         email={contacts[0].email}
       />
-      <Card
+      {/* <Card
         name={contacts[1].name}
         img={contacts[1].imgURL}
         tel={contacts[1].phone}
@@ -24,9 +26,17 @@ function App() {
         img={contacts[2].imgURL}
         tel={contacts[2].phone}
         email={contacts[2].email}
-      />
+      /> */}
     </div>
   );
 }
 
+function App() {
+  return (
+    <div>
+      <h1 className="heading">My Countact</h1>
+      {contacts.map(createCard)}
+    </div>
+  );
+}
 export default App;
