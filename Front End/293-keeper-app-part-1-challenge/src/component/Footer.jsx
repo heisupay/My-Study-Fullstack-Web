@@ -7,7 +7,7 @@ function Footer() {
   return (
     <Footer>
       <p>
-        Copyright
+        Copyright 2024 | by HeiSupay
         {currentYear}
       </p>
     </Footer>
