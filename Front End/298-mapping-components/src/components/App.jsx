@@ -7,7 +7,7 @@ import contacts from "../contacts";
 function createCard(contact) {
   return (
     <div>
-      <h1 className="heading">My Contacts</h1>
+      {/* <h1 className="heading">My Contacts</h1> */}
 
       <Card
         name={contacts[0].name}
