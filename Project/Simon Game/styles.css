@@ -18,36 +18,36 @@ body {
 }
 
 .btn {
-  margin: 25px;
+  margin: 15px;
   display: inline-block;
-  height: 200px;
-  width: 200px;
-  border: 10px solid black;
+  height: 150px;
+  width: 150px;
+  border: 5px solid rgb(73, 73, 73);
   border-radius: 20%;
 }
 
 .game-over {
-  background-color: red;
+  background-color: #F05A7E;
   opacity: 0.8;
 }
 
 .red {
-  background-color: red;
+  background-color: #F05A7E;
 }
 
 .green {
-  background-color: green;
+  background-color: #96CEB4;
 }
 
 .blue {
-  background-color: blue;
+  background-color: #7695FF;
 }
 
 .yellow {
-  background-color: yellow;
+  background-color: #FFD35A;
 }
 
 .pressed {
-  box-shadow: 0 0 20px white;
+  box-shadow: 0 0 20px #f0f0f0;
   background-color: grey;
 }

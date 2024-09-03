@@ -1,6 +1,6 @@
 /** @format */
 
-alert("hi miss supay");
+// alert("hi miss supay");
 var buttonColours = ["red", "blue", "green", "yellow"];
 
 var gamePattern = [];
@@ -18,6 +18,7 @@ $(document).keypress(function () {
 });
 
 $(".btn").click(function () {
+  
   var userChosenColour = $(this).attr("id");
 
   userClickedPattern.push(userChosenColour);
