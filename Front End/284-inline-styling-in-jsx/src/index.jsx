@@ -8,8 +8,8 @@ const customStyle = {
   fontSize: "20px",
   border: "1px solid black",
 };
-customStyle.color = "blue";
 
+customStyle.color = "blue";
 ReactDOM.render(<h1>Hello Supay</h1>, document.getElementById("root"));
 
 // If you're running this locally in VS Code use the commands:
